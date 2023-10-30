@@ -3,15 +3,17 @@ const suanButton = document.getElementById("suan-button");
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
-const margin = {
-    x: 300,
-    y: 250
-};
+canvas.width = window.innerWidth - (window.innerWidth * 0.2);
+canvas.height = window.innerHeight * 0.8;
 
-suanButton.addEventListener('click', e => {
+suanButton.addEventListener('click', _ => {
     const birthdate = birthdateInput.value;
     calculateLifeCode(birthdate);
+
+    redrawCanvas();
 })
+
+window.addEventListener('resize', redrawCanvas);
 
 function splitBirthdate(birthdate)
 {
@@ -57,28 +59,28 @@ function calculateLifeCode(birthdate)
     const v = addDigits(k + "" + n);
     const w = addDigits(l + "" + n);
     const x = addDigits(v + "" + w);
+}
 
-    initializeCanvas();
+function redrawCanvas()
+{
+    canvas.width = window.innerWidth - (window.innerWidth * 0.2);
+    canvas.height = window.innerHeight * 0.8;
+
     drawTriangle();
     insertLines();
 }
 
-function initializeCanvas()
-{
-    canvas.width = window.innerWidth - margin.x;
-    canvas.height = window.innerHeight;
-}
-
 function drawTriangle()
 {
+    const lineWidth = 7;
+    ctx.lineWidth = lineWidth;
 
     ctx.beginPath();
-    ctx.moveTo(margin.x, 10);
-    ctx.lineTo(canvas.width - margin.x, 10);
-    ctx.lineTo(canvas.width / 2, canvas.height - margin.y);
+    ctx.moveTo(lineWidth, lineWidth);
+    ctx.lineTo(canvas.width - lineWidth, lineWidth);
+    ctx.lineTo(canvas.width / 2, canvas.height - lineWidth);
     ctx.closePath();
 
-    ctx.lineWidth = 7;
     ctx.strokeStyle = "black";
     ctx.stroke();
     ctx.closePath();
@@ -86,27 +88,43 @@ function drawTriangle()
 
 function insertLines()
 {
-    const triangleHeight = canvas.height - margin.y;
+    const lineWidth = 7;
+    ctx.lineWidth = lineWidth;
+    const triangleHeight = canvas.height - lineWidth;
     const sectionHeight = triangleHeight / 3;
 
     // straight line middle down
     ctx.beginPath();
-    ctx.moveTo(canvas.width / 2, 10);
+    ctx.moveTo(canvas.width / 2, lineWidth);
     ctx.lineTo(canvas.width / 2, sectionHeight * 2);
+    ctx.stroke();
+    ctx.closePath();
+
+    // straight line section 1
+    ctx.beginPath();
+    ctx.moveTo(canvas.width * 0.3, lineWidth);
+    ctx.lineTo(canvas.width * 0.3, sectionHeight);
+    ctx.stroke();
+    ctx.closePath();
+
+    // straight line section 2
+    ctx.beginPath();
+    ctx.moveTo(canvas.width * 0.7, lineWidth);
+    ctx.lineTo(canvas.width * 0.7, sectionHeight);
     ctx.stroke();
     ctx.closePath();
 
     // horizontal line section 1
     ctx.beginPath();
-    ctx.moveTo(120, sectionHeight);
-    ctx.lineTo(canvas.width - 120, sectionHeight);
+    ctx.moveTo(canvas.width / 6, sectionHeight);
+    ctx.lineTo(canvas.width / 6 * 5, sectionHeight);
     ctx.stroke();
     ctx.closePath();
 
     // horizontal line section 2
     ctx.beginPath();
-    ctx.moveTo(240, sectionHeight * 2);
-    ctx.lineTo(canvas.width - 240, sectionHeight * 2);
+    ctx.moveTo(canvas.width / 6 * 2, sectionHeight * 2);
+    ctx.lineTo(canvas.width / 6 * 4, sectionHeight * 2);
     ctx.stroke();
     ctx.closePath();
 }
@@ -115,3 +133,5 @@ function insertLines()
 birthdateInput.value = "06202002";
 const birthdate = birthdateInput.value;
 calculateLifeCode(birthdate);
+
+redrawCanvas();
