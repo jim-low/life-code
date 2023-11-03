@@ -149,7 +149,9 @@ function insertLines() {
 }
 
 function insertNumbers(data) {
-    ctx.font = "85px serif";
+    const fontSize = 7.8;
+    const fontStyle = "sans-serif";
+    ctx.font = `${fontSize}vw ${fontStyle}`;
     ctx.fillText(data.i, (canvas.width / 6) * 1, canvas.height / 6 + 85 / 3);
     ctx.fillText(
         data.j,
