@@ -152,25 +152,27 @@ function insertNumbers(data) {
     const fontSize = 7.8;
     const fontStyle = "sans-serif";
     ctx.font = `${fontSize}vw ${fontStyle}`;
+
+    // numbers positions
     ctx.fillText(data.i, (canvas.width / 6) * 1, canvas.height / 6 + 85 / 3);
     ctx.fillText(
         data.j,
-        (canvas.width / 6) * 2 + 85 / 4,
+        (canvas.width / 6) * 2.2,
         canvas.height / 6 + 85 / 3,
     );
     ctx.fillText(
         data.k,
-        (canvas.width / 6) * 3 + 85 / 2,
+        (canvas.width / 6) * 3.4,
         canvas.height / 6 + 85 / 3,
     );
     ctx.fillText(
         data.l,
-        (canvas.width / 6) * 5 - 85 / 2,
+        (canvas.width / 6) * 4.65,
         canvas.height / 6 + 85 / 3,
     );
     ctx.fillText(data.m, canvas.width / 3 + 85 / 3, canvas.height / 2 + 85 / 3);
-    ctx.fillText(data.n, canvas.width / 2 + 85 / 2, canvas.height / 2 + 85 / 3);
-    ctx.fillText(data.o, canvas.width / 2 - 85 / 4, canvas.height - 85);
+    ctx.fillText(data.n, canvas.width / 2 * 1.15, canvas.height / 2 + 85 / 3);
+    ctx.fillText(data.o, canvas.width / 2 * 0.95, canvas.height - 85);
 }
 
 // auto test code
