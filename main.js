@@ -14,7 +14,6 @@ suanButton.addEventListener("click", (_) => {
 });
 
 window.addEventListener("resize", _ => {
-    alert("Window innerwidth = " + window.innerWidth);
     if (window.innerWidth < 720) {
         displayErrorMessageOnCanvas();
         return;
@@ -106,12 +105,15 @@ function calculateLifeCode(birthdate) {
 }
 
 function redrawCanvas(data) {
-    canvas.width = window.innerWidth - window.innerWidth * 0.2;
-    canvas.height = window.innerHeight * 0.8;
-
+    resizeCanvas();
     drawTriangle();
     insertLines();
     insertNumbers(data);
+}
+
+function resizeCanvas() {
+    canvas.width = window.innerWidth - window.innerWidth * 0.2;
+    canvas.height = window.innerHeight * 0.8;
 }
 
 function drawTriangle() {
