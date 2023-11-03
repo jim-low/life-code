@@ -13,7 +13,29 @@ suanButton.addEventListener("click", (_) => {
     redrawCanvas(data);
 });
 
-window.addEventListener("resize", redrawCanvas);
+window.addEventListener("resize", _ => {
+    alert("Window innerwidth = " + window.innerWidth);
+    if (window.innerWidth < 720) {
+        displayErrorMessageOnCanvas();
+        return;
+    }
+
+    if (data == null) {
+        data = calculateLifeCode(birthdateInput.value);
+    }
+    redrawCanvas(data);
+});
+
+function displayErrorMessageOnCanvas() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const fontSize = 3;
+    const fontStyle = "sans-serif";
+    ctx.font = `${fontSize}vw ${fontStyle}`;
+
+    const msg = "Device width has to be larger.";
+    ctx.fillText(msg, canvas.width / 2 - msg.length, canvas.height / 2);
+}
 
 function splitBirthdate(birthdate) {
     const monthDay = birthdate.substring(0, birthdate.length / 2);
@@ -177,6 +199,11 @@ function insertNumbers(data) {
 }
 
 // auto test code
-birthdateInput.value = "06202002";
-data = calculateLifeCode(birthdateInput.value);
-redrawCanvas(data);
+if (window.innerWidth < 720) {
+    displayErrorMessageOnCanvas();
+}
+else {
+    birthdateInput.value = "06202002";
+    data = calculateLifeCode(birthdateInput.value);
+    redrawCanvas(data);
+}
