@@ -6,9 +6,10 @@ const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth - window.innerWidth * 0.2;
 canvas.height = window.innerHeight * 0.8;
 
+let data = null;
+
 suanButton.addEventListener("click", (_) => {
-    const birthdate = birthdateInput.value;
-    const data = calculateLifeCode(birthdate);
+    data = calculateLifeCode(birthdateInput.value);
     redrawCanvas(data);
 });
 
@@ -177,6 +178,5 @@ function insertNumbers(data) {
 
 // auto test code
 birthdateInput.value = "06202002";
-const birthdate = birthdateInput.value;
-const data = calculateLifeCode(birthdate);
+data = calculateLifeCode(birthdateInput.value);
 redrawCanvas(data);
