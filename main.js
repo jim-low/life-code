@@ -28,12 +28,13 @@ window.addEventListener("resize", _ => {
 function displayErrorMessageOnCanvas() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    const fontSize = 3;
+    const fontSize = 4;
     const fontStyle = "sans-serif";
     ctx.font = `${fontSize}vw ${fontStyle}`;
+    ctx.textAlign = 'center';
 
     const msg = "Device width has to be larger.";
-    ctx.fillText(msg, canvas.width / 2 - msg.length, canvas.height / 2);
+    ctx.fillText(msg, canvas.width / 2, canvas.height / 2);
 }
 
 function splitBirthdate(birthdate) {
